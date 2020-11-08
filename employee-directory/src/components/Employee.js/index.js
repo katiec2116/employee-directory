@@ -8,7 +8,7 @@ function EmployeeInfo() {
     return (
         <div>
             <ul>
-    
+
             </ul>
         </div >
     )

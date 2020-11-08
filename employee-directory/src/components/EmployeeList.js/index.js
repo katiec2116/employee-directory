@@ -18,7 +18,16 @@ const EmployeeList = () => {
     });
 
 
-
+    useEffect(() => {
+        API.getUsers().then(results => {
+            console.log(results.data.results)
+            setEmployeeState({
+                ...employeeState,
+                users: results.data.results,
+                filteredUsers: results.data.results
+            });
+        });
+    }, []);
 
     return (
         <EmployeeContext.Provider value={{ employeeState }}>
