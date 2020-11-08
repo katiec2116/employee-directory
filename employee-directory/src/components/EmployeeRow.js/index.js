@@ -5,7 +5,7 @@ var moment = require('moment');
 
 function EmployeeRow() {
     const context = useContext(EmployeeContext);
-    
+    // format date from timestamp to mm/dd/yyyy
     function formatDate(date) {
       const dateArray = date.split("-");
       const year = dateArray[0];

@@ -4,6 +4,7 @@ import EmployeeContext from "../../utils/EmployeeContext";
 import Employees from "../Employees.js/index.js"
 import Search from "../Search.js"
 
+// set state to hold user info
 const EmployeeArea = () => {
     const [employeeState, setEmployeeState] = useState({
         users: [],
@@ -18,6 +19,7 @@ const EmployeeArea = () => {
         ]
     });
 
+    // load page up with random set of people
     useEffect(() => {
         API.getUsers().then(res => {
             console.log(res.data.results)
@@ -25,7 +27,8 @@ const EmployeeArea = () => {
         });
     }, []);
 
-
+    // filters list of employees while name is being typed
+    // get value from form in search.js
     function handleInputChange(e) {
         const filter = e.target.value;
         const filteredList = employeeState.users.filter(name => {
@@ -36,17 +39,17 @@ const EmployeeArea = () => {
         setEmployeeState({ ...employeeState, filteredUsers: filteredList });
     };
 
-    
-    async function columnSort(column) {
+    // sort function - toggles ascend descend value on click
+    function columnSort(column) {
         let order = "ascend"
         if (employeeState.order === "ascend") {
-            await setEmployeeState({
+            setEmployeeState({
                 ...employeeState,
                 order: "descend"
             })
             order = "descend"
         } else {
-            await setEmployeeState({
+            setEmployeeState({
                 ...employeeState,
                 order: "ascend"
             })
@@ -55,7 +58,7 @@ const EmployeeArea = () => {
         sort(column,order)
 
     };
-    
+    // sorts data based on colum clicked and current ascend/descend value
     function sort(column, order){
         let sortedUsers;
         if (column === "Name" && order === "ascend") {
