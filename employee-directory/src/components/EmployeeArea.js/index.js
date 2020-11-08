@@ -36,73 +36,67 @@ const EmployeeArea = () => {
         setEmployeeState({ ...employeeState, filteredUsers: filteredList });
     };
 
-
-    function columnSort(column) {
-        let sortedUsers;
+    
+    async function columnSort(column) {
+        let order = "ascend"
         if (employeeState.order === "ascend") {
-            setEmployeeState({
+            await setEmployeeState({
                 ...employeeState,
                 order: "descend"
             })
+            order = "descend"
         } else {
-            setEmployeeState({
+            await setEmployeeState({
                 ...employeeState,
                 order: "ascend"
             })
+            order = "ascend"
         }
+        sort(column,order)
 
-        if(column === "Name" && employeeState.order === "ascend"){
-            sortedUsers = employeeState.filteredUsers.sort((a, b) => 
-            (a.name.first > b.name.first) ? 1 : -1)
+    };
+    
+    function sort(column, order){
+        let sortedUsers;
+        if (column === "Name" && order === "ascend") {
+            sortedUsers = employeeState.filteredUsers.sort((a, b) =>
+                (a.name.first > b.name.first) ? 1 : -1)
         }
-        else if 
-            (column === "Name" && employeeState.order === "descend"){
-                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+        else if
+            (column === "Name" && order === "descend") {
+            sortedUsers = employeeState.filteredUsers.sort((a, b) =>
                 (a.name.first > b.name.first) ? -1 : 1)
         }
-        else if 
-            (column === "Phone" && employeeState.order === "ascend"){
-                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+        else if
+            (column === "Phone" && order === "ascend") {
+            sortedUsers = employeeState.filteredUsers.sort((a, b) =>
                 (a.phone > b.phone) ? 1 : -1)
         }
-        else if 
-            (column === "Phone" && employeeState.order === "descend"){
-                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+        else if
+            (column === "Phone" && order === "descend") {
+            sortedUsers = employeeState.filteredUsers.sort((a, b) =>
                 (b.phone > a.phone) ? 1 : -1)
         }
-        else if 
-            (column === "Email" && employeeState.order === "ascend"){
-                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+        else if
+            (column === "Email" && order === "ascend") {
+            sortedUsers = employeeState.filteredUsers.sort((a, b) =>
                 (a.email > b.email) ? 1 : -1)
         }
-        else if 
-            (column === "Email" && employeeState.order === "descend"){
-                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+        else if
+            (column === "Email" && order === "descend") {
+            sortedUsers = employeeState.filteredUsers.sort((a, b) =>
                 (b.email > a.email) ? 1 : -1)
         }
-        else
-            {
-                sortedUsers = employeeState.users
+        else {
+            sortedUsers = employeeState.users
         }
-        
         setEmployeeState({
             ...employeeState,
+            order: order,
             filteredUsers: sortedUsers
         })
     }
 
-        // const sortedUsers = 
-        // employeeState.filteredUsers.sort((a, b) => (a.heading.name.localeCompare(b.heading[1].name)))
-        
-
-        
-        
-        
-
-
-    
-  
-   
     return (
         <EmployeeContext.Provider value={{ employeeState, handleInputChange, columnSort }}>
             <Search />
