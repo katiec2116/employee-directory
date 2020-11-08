@@ -21,25 +21,92 @@ const EmployeeArea = () => {
     useEffect(() => {
         API.getUsers().then(res => {
             console.log(res.data.results)
-            setEmployeeState({ ...employeeState, users: res.data.results, filteredUsers: res.data.results});
+            setEmployeeState({ ...employeeState, users: res.data.results, filteredUsers: res.data.results });
         });
     }, []);
 
 
-    function handleInputChange (e) {
+    function handleInputChange(e) {
         const filter = e.target.value;
         const filteredList = employeeState.users.filter(name => {
-        let values = name.name.first.toLowerCase();
-        return values.indexOf(filter.toLowerCase()) !== -1;
+            let values = name.name.first.toLowerCase();
+            return values.indexOf(filter.toLowerCase()) !== -1;
         });
-    
-        setEmployeeState({ ...employeeState, filteredUsers: filteredList });
-      };
 
+        setEmployeeState({ ...employeeState, filteredUsers: filteredList });
+    };
+
+
+    function columnSort(column) {
+        let sortedUsers;
+        if (employeeState.order === "ascend") {
+            setEmployeeState({
+                ...employeeState,
+                order: "descend"
+            })
+        } else {
+            setEmployeeState({
+                ...employeeState,
+                order: "ascend"
+            })
+        }
+
+        if(column === "Name" && employeeState.order === "ascend"){
+            sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+            (a.name.first > b.name.first) ? 1 : -1)
+        }
+        else if 
+            (column === "Name" && employeeState.order === "descend"){
+                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+                (a.name.first > b.name.first) ? -1 : 1)
+        }
+        else if 
+            (column === "Phone" && employeeState.order === "ascend"){
+                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+                (a.phone > b.phone) ? 1 : -1)
+        }
+        else if 
+            (column === "Phone" && employeeState.order === "descend"){
+                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+                (b.phone > a.phone) ? 1 : -1)
+        }
+        else if 
+            (column === "Email" && employeeState.order === "ascend"){
+                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+                (a.email > b.email) ? 1 : -1)
+        }
+        else if 
+            (column === "Email" && employeeState.order === "descend"){
+                sortedUsers = employeeState.filteredUsers.sort((a, b) => 
+                (b.email > a.email) ? 1 : -1)
+        }
+        else
+            {
+                sortedUsers = employeeState.users
+        }
+        
+        setEmployeeState({
+            ...employeeState,
+            filteredUsers: sortedUsers
+        })
+    }
+
+        // const sortedUsers = 
+        // employeeState.filteredUsers.sort((a, b) => (a.heading.name.localeCompare(b.heading[1].name)))
+        
+
+        
+        
+        
+
+
+    
+  
+   
     return (
-        <EmployeeContext.Provider value={{ employeeState, handleInputChange }}>
-        <Search />
-        <Employees />
+        <EmployeeContext.Provider value={{ employeeState, handleInputChange, columnSort }}>
+            <Search />
+            <Employees />
         </EmployeeContext.Provider>
     );
 }

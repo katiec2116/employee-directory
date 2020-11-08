@@ -3,7 +3,7 @@ import EmployeeContext from "../../utils/EmployeeContext";
 import EmployeeRow from "../EmployeeRow.js"
 
 
-function EmployeeInfo() {
+function Employees() {
     const context = useContext(EmployeeContext);
 
     return (
@@ -17,7 +17,7 @@ function EmployeeInfo() {
                                 key={name}
                                 style={{ width }}
                                 onClick={() => {
-                                    context.handleSort(name.toLowerCase());
+                                    context.columnSort(name);
                                 }}>
                                     {name}
                                 <span className="pointer"></span>
@@ -33,4 +33,4 @@ function EmployeeInfo() {
 };
 
 
-export default EmployeeInfo;
+export default Employees;

@@ -11,7 +11,7 @@ function SearchBar (){
     <div>
        <form>
       <div className="form-group">
-        <label htmlForm="search">Search:</label>
+        <label htmlFor="search">Search:</label>
         <input
           name="search"
           onChange={e => context.handleInputChange(e)}
