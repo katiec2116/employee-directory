@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 import EmployeeContext from "../../utils/EmployeeContext";
 import Employees from "../Employees.js/index.js"
+import Search from "../Search.js"
 
-const EmployeeList = () => {
+const EmployeeArea = () => {
     const [employeeState, setEmployeeState] = useState({
         users: [],
         order: "ascend",
@@ -17,7 +18,6 @@ const EmployeeList = () => {
         ]
     });
 
-
     useEffect(() => {
         API.getUsers().then(res => {
             console.log(res.data.results)
@@ -28,8 +28,8 @@ const EmployeeList = () => {
 
     function handleInputChange (e) {
         const filter = e.target.value;
-        const filteredList = employeeState.users.filter(item => {
-        let values = item.name.first.toLowerCase();
+        const filteredList = employeeState.users.filter(name => {
+        let values = name.name.first.toLowerCase();
         return values.indexOf(filter.toLowerCase()) !== -1;
         });
     
@@ -38,9 +38,10 @@ const EmployeeList = () => {
 
     return (
         <EmployeeContext.Provider value={{ employeeState, handleInputChange }}>
+        <Search />
         <Employees />
         </EmployeeContext.Provider>
     );
 }
 
-export default EmployeeList;
+export default EmployeeArea;

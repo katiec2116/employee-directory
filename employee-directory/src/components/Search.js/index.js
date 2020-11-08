@@ -11,7 +11,7 @@ function SearchBar (){
     <div>
        <form>
       <div className="form-group">
-        <label htmlFor="search">Search:</label>
+        <label htmlForm="search">Search:</label>
         <input
           name="search"
           onChange={e => context.handleInputChange(e)}
@@ -20,9 +20,6 @@ function SearchBar (){
           placeholder="Search for an Employee"
           id="search"
         />
-        <button  className="btn btn-primary mt-3">
-          Search
-        </button>
       </div>
     </form>
 
