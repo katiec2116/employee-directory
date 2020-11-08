@@ -26,7 +26,15 @@ const EmployeeList = () => {
     }, []);
 
 
-
+    function handleInputChange (e) {
+        const filter = e.target.value;
+        const filteredList = employeeState.users.filter(item => {
+        let values = item.name.first.toLowerCase();
+        return values.indexOf(filter.toLowerCase()) !== -1;
+        });
+    
+        setEmployeeState({ ...employeeState, filteredUsers: filteredList });
+      };
 
     return (
         <EmployeeContext.Provider value={{ employeeState, handleInputChange }}>
