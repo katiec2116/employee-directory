@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import EmployeeContext from "../../utils/EmployeeContext";
 import Employees from "../Employees.js/index.js"
 import Search from "../Search.js"
+import "./style.css";
 
 // set state to hold user info
 const EmployeeArea = () => {
@@ -18,7 +19,7 @@ const EmployeeArea = () => {
             { name: "DOB", width: "10%", }
         ]
     });
-
+let column;
     // load page up with random set of people
     useEffect(() => {
         API.getUsers().then(res => {
@@ -55,10 +56,11 @@ const EmployeeArea = () => {
             })
             order = "ascend"
         }
+        column = column
         sort(column,order)
 
     };
-    // sorts data based on colum clicked and current ascend/descend value
+    // sorts data based on column clicked and current ascend/descend value
     function sort(column, order){
         let sortedUsers;
         if (column === "Name" && order === "ascend") {
@@ -102,8 +104,10 @@ const EmployeeArea = () => {
 
     return (
         <EmployeeContext.Provider value={{ employeeState, handleInputChange, columnSort }}>
+            <div className = "Container">
             <Search />
-            <Employees />
+            <Employees column={column} order={employeeState.order}/>
+            </div>
         </EmployeeContext.Provider>
     );
 }

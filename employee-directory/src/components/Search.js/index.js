@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import EmployeeContext from "../../utils/EmployeeContext";
+import "./style.css";
 
 
 
@@ -10,14 +11,13 @@ function SearchBar (){
     return (
     <div>
        <form>
-      <div className="form-group">
-        <label htmlFor="search">Search:</label>
+      <div className="form-group mt-3">
         <input
           name="search"
           onChange={e => context.handleInputChange(e)}
           type="text"
           className="form-control"
-          placeholder="Search for an Employee"
+          placeholder="Search for an Employee...."
           id="search"
         />
       </div>

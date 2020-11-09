@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import EmployeeContext from "../../utils/EmployeeContext";
-var moment = require('moment');
+import "./style.css";
 
 
 function EmployeeRow() {

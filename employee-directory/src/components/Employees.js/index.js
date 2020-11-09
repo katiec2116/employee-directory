@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import EmployeeContext from "../../utils/EmployeeContext";
 import EmployeeRow from "../EmployeeRow.js"
+import "./style.css";
 
 
-function Employees() {
+function Employees(props) {
     const context = useContext(EmployeeContext);
 
     return (
@@ -13,14 +14,14 @@ function Employees() {
                     <tr>
                         {context.employeeState.headings.map(({ name, width }) => {
                         return (
-                            <th className="col"
+                            <th className="colTitle"
+                                className={props.order === "ascend" ? "ascend" : ""}
                                 key={name}
                                 style={{ width }}
                                 onClick={() => {
                                     context.columnSort(name);
                                 }}>
-                                    {name}
-                                <span className="pointer"></span>
+                                    {name} <i className={props.order === "ascend" ? "fa fa-arrow-up" : "fa fa-arrow-down"}></i>
                             </th>
                         )
                         })}
