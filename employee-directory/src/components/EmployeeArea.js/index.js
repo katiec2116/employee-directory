@@ -3,23 +3,22 @@ import API from "../../utils/API";
 import EmployeeContext from "../../utils/EmployeeContext";
 import Employees from "../Employees.js/index.js"
 import Search from "../Search.js"
-import "./style.css";
 
 // set state to hold user info
 const EmployeeArea = () => {
     const [employeeState, setEmployeeState] = useState({
         users: [],
-        order: "ascend",
+        order: "",
+        active: "",
         filteredUsers: [],
         headings: [
-            { name: "Image", width: "10%", },
-            { name: "Name", width: "10%", },
-            { name: "Phone", width: "10%", },
-            { name: "Email", width: "10%", },
-            { name: "DOB", width: "10%", }
+            { name: "Image" },
+            { name: "Name"},
+            { name: "Phone" },
+            { name: "Email" },
+            { name: "DOB" }
         ]
     });
-let column;
     // load page up with random set of people
     useEffect(() => {
         API.getUsers().then(res => {
@@ -56,7 +55,6 @@ let column;
             })
             order = "ascend"
         }
-        column = column
         sort(column,order)
 
     };
@@ -98,6 +96,7 @@ let column;
         setEmployeeState({
             ...employeeState,
             order: order,
+            active:column,
             filteredUsers: sortedUsers
         })
     }
@@ -106,7 +105,7 @@ let column;
         <EmployeeContext.Provider value={{ employeeState, handleInputChange, columnSort }}>
             <div className = "Container">
             <Search />
-            <Employees column={column} order={employeeState.order}/>
+            <Employees column={employeeState.active} order={employeeState.order}/>
             </div>
         </EmployeeContext.Provider>
     );

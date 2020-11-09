@@ -6,6 +6,7 @@ import "./style.css";
 
 function SearchBar (){ 
     const context = useContext(EmployeeContext);
+    const count = context.employeeState.filteredUsers.length
 
 
     return (
@@ -22,6 +23,7 @@ function SearchBar (){
         />
       </div>
     </form>
+    <p className="count">{count} results</p>
 
     </div>
 

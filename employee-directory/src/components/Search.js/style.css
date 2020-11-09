@@ -3,3 +3,9 @@ form {
     margin:auto;
     width:20%
 }
+
+.count{
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bold;
+}

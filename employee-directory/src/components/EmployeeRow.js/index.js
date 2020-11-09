@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import EmployeeContext from "../../utils/EmployeeContext";
-import "./style.css";
 
 
 function EmployeeRow() {
@@ -21,12 +20,13 @@ function EmployeeRow() {
             {context.employeeState.filteredUsers.map(({ login, name, picture, phone, email, dob }) => {
                 return (
 
-            <tr key={login.uuid}>
+            <tr className="text-center"
+                key={login.uuid}>
                 <td data-th="Image">
                   <img
                     src={picture.medium}
                     alt={"profile"}
-                    className="img-responsive"
+                    className="img-responsive pl-4"
                   />
                 </td>
                 <td data-th="Name">
