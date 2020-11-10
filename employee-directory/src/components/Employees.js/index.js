@@ -12,7 +12,7 @@ function Employees(props) {
             <table id="table" className="table table-striped table-hover table-condensed">
                 <thead>
                     <tr>
-                        {context.employeeState.headings.map(({ name, width }) => {
+                        {context.employeeState.headings.map(({ name }) => {
                         return (
                             <th className="text-center"
                                 key={name}
