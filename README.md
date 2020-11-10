@@ -35,7 +35,7 @@ To run use the following command
 > npm start
 
 or use the deployed version
-https://mighty-inlet-94954.herokuapp.com/
+https://katiec2116.github.io/employee-directory/
 
 <img src=recording.gif width=700px>
 
